@@ -1,0 +1,37 @@
+{
+  "name": "Тестовый робот",
+  "description": "Простой робот для тестирования (всегда покупает CALL)",
+  "asset_id": "EURUSD_otc",
+  "amount": 1.0,
+  "duration": 60,
+  "interval": 30,
+  "max_trades": 0,
+  "strategy": {
+    "strategy_type": "simple",
+    "parameters": {},
+    "conditions": {
+      "call": "always",
+      "put": "never"
+    }
+  },
+  "use_martingale": false,
+  "martingale_levels": [],
+  "stop_loss": 0.0,
+  "take_profit": 0.0,
+  "time_from": "00:00",
+  "time_to": "23:59",
+  "work_days": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "total_trades": 0,
+  "profitable_trades": 0,
+  "total_profit": 0.0,
+  "created_at": "2026-03-21T20:35:31.022436",
+  "updated_at": "2026-03-21T20:35:31.022459"
+}

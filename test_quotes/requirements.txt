@@ -1,0 +1,6 @@
+# Тестовый проект - Quotes Viewer
+pyqtgraph>=0.13.0
+numpy>=1.24.0
+
+# BinaryOptionsToolsV2 (устанавливается отдельно)
+# pip install "https://github.com/ChipaDevTeam/BinaryOptionsTools-v2/releases/download/v0.2.9/binaryoptionstoolsv2-0.2.9-cp39-abi3-manylinux_2_28_x86_64.whl"

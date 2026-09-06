@@ -1,0 +1,59 @@
+{
+  "version": "7.1.9",
+  "api": {
+    "robotApiServer": "https://pocketoption.expert/api",
+    "myTetherApiServer": "https://mytether.cash/api",
+    "wsServerRobot": "https://pocketoption.expert",
+    "mtServerRobot": "https://pocketoption.expert",
+    "wsPlatformHosts": ["po.market", "pocketoption.expert"]
+  },
+  "assets": {
+    "currency": [
+      {"id": "EURUSD_otc", "title": "EUR/USD OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "GBPUSD_otc", "title": "GBP/USD OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "AUDUSD_otc", "title": "AUD/USD OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "USDJPY_otc", "title": "USD/JPY OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "USDCAD_otc", "title": "USD/CAD OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "USDCHF_otc", "title": "USD/CHF OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "NZDUSD_otc", "title": "NZD/USD OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "EURUSD", "title": "EUR/USD", "minExp": 60, "profit": 87, "available": true},
+      {"id": "GBPUSD", "title": "GBP/USD", "minExp": 60, "profit": 87, "available": true}
+    ],
+    "cryptocurrency": [
+      {"id": "BTCUSD_otc", "title": "Bitcoin OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "ETHUSD_otc", "title": "Ethereum OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "LTCUSD_otc", "title": "Litecoin OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "XRPUSD_otc", "title": "Ripple OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "ADAUSD_otc", "title": "Cardano OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "BTCUSD", "title": "Bitcoin", "minExp": 60, "profit": 15, "available": true},
+      {"id": "ETHUSD", "title": "Ethereum", "minExp": 60, "profit": 15, "available": true}
+    ],
+    "stock": [
+      {"id": "#AAPL_otc", "title": "Apple OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "#TSLA_otc", "title": "Tesla OTC", "minExp": 5, "profit": 71, "available": true},
+      {"id": "#MSFT_otc", "title": "Microsoft OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "#GOOGL_otc", "title": "Google OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "#AMZN_otc", "title": "Amazon OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "#META_otc", "title": "Meta OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "#NVDA_otc", "title": "NVIDIA OTC", "minExp": 5, "profit": 92, "available": true}
+    ],
+    "index": [
+      {"id": "CAC40", "title": "CAC 40", "minExp": 60, "profit": 45, "available": true},
+      {"id": "DJI30_otc", "title": "DJI 30 OTC", "minExp": 5, "profit": 45, "available": true},
+      {"id": "SPX500_otc", "title": "S&P 500 OTC", "minExp": 5, "profit": 45, "available": true},
+      {"id": "NDX100_otc", "title": "NASDAQ 100 OTC", "minExp": 5, "profit": 45, "available": true}
+    ],
+    "commodity": [
+      {"id": "GOLD", "title": "Gold", "minExp": 60, "profit": 85, "available": true},
+      {"id": "SILVER", "title": "Silver", "minExp": 60, "profit": 85, "available": true},
+      {"id": "GOLD_otc", "title": "Gold OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "SILVER_otc", "title": "Silver OTC", "minExp": 5, "profit": 92, "available": true}
+    ],
+    "oils": [
+      {"id": "OIL", "title": "Oil", "minExp": 60, "profit": 85, "available": true},
+      {"id": "BRENT", "title": "Brent", "minExp": 60, "profit": 85, "available": true},
+      {"id": "OIL_otc", "title": "Oil OTC", "minExp": 5, "profit": 92, "available": true},
+      {"id": "BRENT_otc", "title": "Brent OTC", "minExp": 5, "profit": 92, "available": true}
+    ]
+  }
+}

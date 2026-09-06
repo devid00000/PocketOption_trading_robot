@@ -1,0 +1,16 @@
+.env*
+.env(copy)
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+.venv/
+Пример расширения PocketOptionRobot/
+скрины расширения/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/*.log
+**/logs/**
+**/exports/**

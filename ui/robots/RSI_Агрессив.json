@@ -1,0 +1,147 @@
+{
+  "name": "RSI Агрессив",
+  "description": "Торгует по RSI с частыми сделками",
+  "assets": [
+    "EURUSD_otc"
+  ],
+  "amount": 1.0,
+  "duration": 60,
+  "interval": 30,
+  "max_trades": 0,
+  "strategy_config": {
+    "name": "RSI Агрессив",
+    "description": "Торгует по RSI с частыми сделками",
+    "id": "f21f0538-741f-48dc-be81-3348988287a3",
+    "type": "personal",
+    "assets": [
+      "EURUSD_otc"
+    ],
+    "asset_groups": [],
+    "max_active_assets": 10,
+    "exclude_assets": [],
+    "indicators": [
+      {
+        "type": "rsi",
+        "enabled": true,
+        "id": "55dedcb7-600f-4312-a0f3-39c0c1ae18cd",
+        "settings": {
+          "period": 14,
+          "overbought": 70,
+          "oversold": 30,
+          "price_type": "close",
+          "tf": 60,
+          "bar": 0,
+          "time_inspection": "newBar",
+          "signal_up": "valRsi<btl",
+          "signal_down": "valRsi>tpl"
+        },
+        "weight": 1.0
+      }
+    ],
+    "min_agreement": 1,
+    "use_weights": false,
+    "regulations": {
+      "mode": "trade",
+      "time_from": "00:00",
+      "time_to": "23:59",
+      "timezone": "UTC",
+      "work_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "min_profit": 85,
+      "expiration": 60,
+      "bet": 1.0,
+      "max_active_trades": 1,
+      "max_bets": 1,
+      "max_daily_loss": 100.0,
+      "max_daily_profit": 500.0,
+      "stop_loss": 0.0,
+      "take_profit": 0.0,
+      "stop_on_loss": false,
+      "stop_on_profit": false
+    },
+    "martingale": {
+      "enabled": true,
+      "max_steps": 3,
+      "reset_on_win": true,
+      "steps": [
+        {
+          "step": 1,
+          "ratio": 2.0,
+          "auto_ratio": true,
+          "expiration": 0,
+          "direction": "previous",
+          "action_on_loss": "new_asset",
+          "min_profit": 75
+        },
+        {
+          "step": 2,
+          "ratio": 2.5,
+          "auto_ratio": true,
+          "expiration": 0,
+          "direction": "previous",
+          "action_on_loss": "new_asset",
+          "min_profit": 60
+        },
+        {
+          "step": 3,
+          "ratio": 3.0,
+          "auto_ratio": true,
+          "expiration": 0,
+          "direction": "previous",
+          "action_on_loss": "stop",
+          "min_profit": 60
+        }
+      ]
+    },
+    "total_trades": 0,
+    "profitable_trades": 0,
+    "total_profit": 0.0,
+    "user_title": ""
+  },
+  "martingale_config": {
+    "enabled": true,
+    "max_steps": 3,
+    "reset_on_win": true,
+    "steps": [
+      {
+        "step": 1,
+        "ratio": 2.0,
+        "auto_ratio": true,
+        "expiration": 0,
+        "direction": "previous",
+        "action_on_loss": "new_asset",
+        "min_profit": 75
+      },
+      {
+        "step": 2,
+        "ratio": 2.5,
+        "auto_ratio": true,
+        "expiration": 0,
+        "direction": "previous",
+        "action_on_loss": "new_asset",
+        "min_profit": 60
+      },
+      {
+        "step": 3,
+        "ratio": 3.0,
+        "auto_ratio": true,
+        "expiration": 0,
+        "direction": "previous",
+        "action_on_loss": "stop",
+        "min_profit": 60
+      }
+    ]
+  },
+  "total_trades": 0,
+  "profitable_trades": 0,
+  "total_profit": 0.0,
+  "created_at": "2026-09-06T12:37:42.105764",
+  "updated_at": "2026-09-06T12:37:42.105774"
+}

@@ -1,0 +1,55 @@
+# HTTP клиент
+httpx>=0.25.0
+
+# WebSocket
+websockets>=12.0
+
+# Socket.IO клиент
+python-socketio>=5.10.0
+
+# Pocket Option API adapter (unofficial; verify wheel compatibility with your OS/Python)
+# The current development environment was verified with BinaryOptionsToolsV2==0.2.14.
+BinaryOptionsToolsV2==0.2.14
+
+# GUI (PySide6)
+PySide6>=6.6.0
+
+# Веб-интерфейс (опционально)
+# fastapi>=0.104.0
+# uvicorn>=0.24.0
+
+# База данных
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+
+# Технические индикаторы
+pandas-ta>=0.3.14b
+
+# Работа с данными
+pandas>=2.1.0
+numpy>=1.26.0
+
+# Конфигурация и валидация
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+pyyaml>=6.0.1
+
+# Логирование
+loguru>=0.7.2
+
+# Тестирование
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Утилиты
+python-dotenv>=1.0.0
+click>=8.1.7
+
+# Криптография для cookie
+cryptography>=41.0.0
+
+# Playwright (автоматизация браузера)
+playwright>=1.40.0
+
+# Графики для GUI
+pyqtgraph>=0.13.0

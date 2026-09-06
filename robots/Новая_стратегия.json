@@ -1,0 +1,105 @@
+{
+  "name": "Новая стратегия",
+  "description": "",
+  "assets": [
+    "EURUSD_otc"
+  ],
+  "amount": 1.0,
+  "duration": 60,
+  "interval": 30,
+  "max_trades": 0,
+  "strategy_config": {
+    "name": "Новая стратегия",
+    "description": "",
+    "id": "e7aff9c4-ad75-40ac-9d1f-dbde023214cd",
+    "type": "personal",
+    "assets": [],
+    "asset_groups": [],
+    "max_active_assets": 10,
+    "exclude_assets": [],
+    "indicators": [
+      {
+        "type": "cci",
+        "enabled": true,
+        "id": "f5f8e23c-6caf-4299-b554-a5d6c6618294",
+        "settings": {
+          "tf": 60,
+          "bar": 0,
+          "time_inspection": "newBar"
+        },
+        "weight": 1.0
+      },
+      {
+        "type": "macd",
+        "enabled": true,
+        "id": "d91041ef-a377-4b5b-b6d8-78d0e6606f42",
+        "settings": {
+          "tf": 60,
+          "bar": 0,
+          "time_inspection": "newBar"
+        },
+        "weight": 1.0
+      },
+      {
+        "type": "rsi",
+        "enabled": true,
+        "id": "5d1a018d-8c7e-4f13-9cf7-666e0dd5a938",
+        "settings": {
+          "tf": 60,
+          "bar": 0,
+          "time_inspection": "newBar"
+        },
+        "weight": 1.0
+      }
+    ],
+    "min_agreement": 1,
+    "use_weights": false,
+    "regulations": {
+      "mode": "trade",
+      "time_from": "00:00",
+      "time_to": "23:59",
+      "timezone": "UTC",
+      "work_days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "min_profit": 85,
+      "expiration": 60,
+      "bet": 1.0,
+      "max_active_trades": 1,
+      "max_bets": 1,
+      "max_daily_loss": 100.0,
+      "max_daily_profit": 500.0,
+      "stop_loss": 0.0,
+      "take_profit": 0.0,
+      "stop_on_loss": false,
+      "stop_on_profit": false
+    },
+    "martingale": {
+      "enabled": false,
+      "max_steps": 0,
+      "reset_on_win": true,
+      "steps": []
+    },
+    "total_trades": 0,
+    "profitable_trades": 0,
+    "total_profit": 0.0,
+    "user_title": ""
+  },
+  "martingale_config": {
+    "enabled": false,
+    "max_steps": 0,
+    "reset_on_win": true,
+    "steps": []
+  },
+  "total_trades": 0,
+  "profitable_trades": 0,
+  "total_profit": 0.0,
+  "created_at": "2026-03-23T12:36:53.561623",
+  "updated_at": "2026-03-23T12:37:09.388183"
+}
