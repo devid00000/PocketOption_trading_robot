@@ -49,6 +49,14 @@ def _extract_quotes(payload: Any) -> list[dict]:
 
     def walk(node: Any) -> None:
         if isinstance(node, dict):
+            # The platform extension receives a batch under ``prices`` with
+            # records shaped as {asset, time, price}. Keep this branch before
+            # generic recursion so the exact protocol is handled explicitly.
+            prices = node.get("prices")
+            if isinstance(prices, (list, tuple)):
+                for price_record in prices:
+                    walk(price_record)
+
             symbol = node.get("symbol") or node.get("asset") or node.get("active")
             timestamp = node.get("timestamp") or node.get("time") or node.get("date")
             price = node.get("price") or node.get("rate") or node.get("value")
@@ -74,7 +82,11 @@ def _extract_quotes(payload: Any) -> list[dict]:
                 walk(child)
 
     walk(payload)
-    return quotes
+    unique: dict[tuple[str, int, float], dict] = {}
+    for quote in quotes:
+        key = (quote["symbol"], quote["timestamp"], quote["price"])
+        unique[key] = quote
+    return list(unique.values())
 
 
 class BrowserMarketDataThread(QThread):
@@ -93,6 +105,7 @@ class BrowserMarketDataThread(QThread):
         self._seen_auth: set[str] = set()
         self._frame_count = 0
         self._quote_count = 0
+        self._event_counts: dict[str, int] = {}
 
     def run(self) -> None:
         try:
@@ -131,6 +144,9 @@ class BrowserMarketDataThread(QThread):
                     self.authenticated.emit(auth)
 
                 payload = _parse_frame(frame)
+                if isinstance(payload, list) and payload:
+                    event_name = str(payload[0])
+                    self._event_counts[event_name] = self._event_counts.get(event_name, 0) + 1
                 for quote in _extract_quotes(payload):
                     self._quote_count += 1
                     self.tick.emit(quote)
@@ -156,7 +172,8 @@ class BrowserMarketDataThread(QThread):
 
             self.status.emit(
                 f"Браузер остановлен: frames={self._frame_count}, "
-                f"quote candidates={self._quote_count}"
+                f"quote candidates={self._quote_count}, "
+                f"events={dict(sorted(self._event_counts.items(), key=lambda item: -item[1])[:8])}"
             )
             await context.close()
 

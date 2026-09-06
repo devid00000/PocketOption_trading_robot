@@ -346,6 +346,10 @@ class DebugChartWindow(QMainWindow):
             return
 
         config = load_runtime_config()
+        # Browser data must not be mixed with the BinaryOptionsToolsV2 OHLC
+        # history, because the two sources may have different price feeds.
+        self.candles = []
+        self._render_candles()
         self.browser_worker = BrowserMarketDataThread(
             config.platform_url,
             str(PROJECT_ROOT / "browser_profile"),
