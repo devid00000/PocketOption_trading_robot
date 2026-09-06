@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import re
+import time
 from datetime import datetime, timezone
 
 import pyqtgraph as pg
@@ -11,11 +12,12 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QBrush, QColor, QPen
 from PySide6.QtWidgets import (
     QComboBox, QGraphicsRectItem, QHBoxLayout, QLabel, QMainWindow,
-    QVBoxLayout, QWidget,
+    QPushButton, QVBoxLayout, QWidget,
 )
 
-from config.runtime import load_runtime_config
+from config.runtime import PROJECT_ROOT, load_runtime_config
 from ui.app import RobotWorker
+from ui.widgets.browser_market_data import BrowserMarketDataThread
 
 
 TIMEFRAMES = [("S5", 5), ("S10", 10), ("S15", 15), ("S30", 30),
@@ -123,6 +125,7 @@ class DebugChartWindow(QMainWindow):
         super().__init__(parent)
         self.ssid = ssid
         self.worker: RobotWorker | None = None
+        self.browser_worker: BrowserMarketDataThread | None = None
         self.current_symbol = load_runtime_config().default_symbol
         # Five seconds makes the first realtime candle visible quickly.
         self.current_period = 5
@@ -159,6 +162,9 @@ class DebugChartWindow(QMainWindow):
 
         self.status_label = QLabel("Подключение...")
         controls.addWidget(self.status_label, 2)
+        self.browser_button = QPushButton("Браузерный источник")
+        self.browser_button.clicked.connect(self._toggle_browser_source)
+        controls.addWidget(self.browser_button)
         layout.addLayout(controls)
 
         self.price_axis = PriceAxis(orientation="left")
@@ -330,7 +336,65 @@ class DebugChartWindow(QMainWindow):
     def _on_error(self, message: str) -> None:
         self.status_label.setText(f"Ошибка: {message}")
 
+    def _toggle_browser_source(self) -> None:
+        """Use the same visible platform browser as the market-data source."""
+        if self.browser_worker and self.browser_worker.isRunning():
+            self.browser_worker.stop()
+            self.browser_worker.wait(5000)
+            self.browser_worker = None
+            self.browser_button.setText("Браузерный источник")
+            return
+
+        config = load_runtime_config()
+        self.browser_worker = BrowserMarketDataThread(
+            config.platform_url,
+            str(PROJECT_ROOT / "browser_profile"),
+            self,
+        )
+        self.browser_worker.status.connect(self.status_label.setText)
+        self.browser_worker.failed.connect(self._on_error)
+        self.browser_worker.authenticated.connect(
+            lambda _ssid: self.status_label.setText("Браузер авторизован, анализирую котировки...")
+        )
+        self.browser_worker.tick.connect(self._on_browser_tick)
+        self.browser_worker.start()
+        self.browser_button.setText("Остановить браузер")
+
+    def _on_browser_tick(self, tick: dict) -> None:
+        """Aggregate browser quote candidates into chart candles."""
+        if tick.get("symbol") != self.current_symbol:
+            return
+        timestamp = int(tick["timestamp"])
+        if timestamp > int(time.time()) + 1800:
+            timestamp -= 7200
+        period = self.current_period
+        bucket = (timestamp // period) * period
+        price = float(tick["price"])
+        if self.candles and int(self.candles[-1]["timestamp"]) == bucket:
+            candle = self.candles[-1]
+            candle["high"] = max(candle["high"], price)
+            candle["low"] = min(candle["low"], price)
+            candle["close"] = price
+            candle["is_closed"] = False
+        elif not self.candles or bucket > int(self.candles[-1]["timestamp"]):
+            if self.candles:
+                self.candles[-1]["is_closed"] = True
+            self.candles.append({
+                "timestamp": bucket,
+                "open": price,
+                "high": price,
+                "low": price,
+                "close": price,
+                "is_closed": False,
+            })
+            self.candles = self.candles[-50:]
+        self._on_candles(self.current_symbol, self.current_period, self.candles)
+
     def closeEvent(self, event) -> None:
+        if self.browser_worker:
+            self.browser_worker.stop()
+            self.browser_worker.wait(5000)
+            self.browser_worker = None
         if self.worker:
             self.worker.stop()
             self.worker.wait(5000)

@@ -15,11 +15,12 @@ Implemented foundation:
 - Balance polling
 - Currency asset discovery
 - Experimental realtime candlestick chart
+- Experimental persistent-browser market-data capture
 - Strategy and indicator models
 - JSON configuration
 - SQLite trade logging foundation
 
-The current known limitation is that the experimental chart does not yet fully match the Pocket Option chart. The detailed audit, checkpoint, roadmap, and current development status are documented in [`README_PROJECT.md`](README_PROJECT.md) and [`roadmap.md`](roadmap.md).
+The current known limitation is that the experimental chart does not yet fully match the Pocket Option chart. A separate persistent-browser diagnostic source is being tested to identify the exact market-data stream used by the platform. The detailed audit, checkpoint, roadmap, and current development status are documented in [`README_PROJECT.md`](README_PROJECT.md) and [`roadmap.md`](roadmap.md).
 
 ## Safety
 
